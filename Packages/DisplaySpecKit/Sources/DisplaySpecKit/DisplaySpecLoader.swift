@@ -30,9 +30,18 @@ public final class DisplaySpecLoader: @unchecked Sendable {
     }
     
     /// Default spec using DuoDisplayConstants (PM-researched values)
+    ///
+    /// NOTE: The creaseBand here is a MOCK DEFAULT for bundled spec only.
+    /// At runtime, the crease must come from reservedRegions(kind: .division).
+    /// It exists only when half-folded and is 0 when fully unfolded.
     public static func defaultSpec() -> DisplaySpec {
         let outerCrop = calculateDefaultOuterCrop()
-        let creaseHalfWidth = DuoDisplayConstants.creaseWidthFraction / 2
+        
+        // Mock crease band: convert mock ~40pt to normalized fraction
+        // Based on mock inner width of 951pt, 40pt = ~4.2% = 0.021 of each side
+        // This is for BUNDLED SPEC ONLY - runtime uses reservedRegions
+        let mockCreaseNormalized = DuoDisplayConstants.mockCreaseWidthPt / DuoDisplayConstants.mockInnerWidthPt
+        let creaseHalfWidth = mockCreaseNormalized / 2
         
         return DisplaySpec(
             inner: CGSize(

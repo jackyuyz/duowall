@@ -146,7 +146,7 @@ public struct DefaultPacks {
                 palette: ["#1a1a2e", "#16213e", "#0f3460", "#e94560"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "aurora.heic",
+                innerImageFile: "aurora.png",
                 accessibilityDescription: "Aurora borealis over mountains, reveals mountain range when opened",
                 tags: ["nature", "night", "mountains"]
             ),
@@ -157,7 +157,7 @@ public struct DefaultPacks {
                 palette: ["#0a1628", "#1a3a5c", "#2d6187", "#4a90b5"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "ocean-depths.heic",
+                innerImageFile: "ocean-depths.png",
                 accessibilityDescription: "Deep ocean scene, reveals underwater coral when opened",
                 tags: ["ocean", "underwater", "calm"]
             ),
@@ -168,7 +168,7 @@ public struct DefaultPacks {
                 palette: ["#ff6b6b", "#ffa07a", "#ffd93d", "#6bcb77"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "sunset-gradient.heic",
+                innerImageFile: "sunset-gradient.png",
                 accessibilityDescription: "Warm sunset colors, reveals extended sky when opened",
                 tags: ["gradient", "warm", "sunset"]
             ),
@@ -179,7 +179,7 @@ public struct DefaultPacks {
                 palette: ["#f8f9fa", "#e9ecef", "#343a40", "#212529"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "minimal-geo.heic",
+                innerImageFile: "minimal-geo.png",
                 accessibilityDescription: "Clean geometric shapes, reveals full pattern when opened",
                 tags: ["minimal", "geometric", "modern"]
             ),
@@ -190,7 +190,7 @@ public struct DefaultPacks {
                 palette: ["#2d4a3e", "#3d6b4f", "#5a8f6c", "#95c4a8"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "forest-mist.heic",
+                innerImageFile: "forest-mist.png",
                 accessibilityDescription: "Misty forest, reveals depth of trees when opened",
                 tags: ["nature", "forest", "calm"]
             ),
@@ -201,7 +201,7 @@ public struct DefaultPacks {
                 palette: ["#0d1b2a", "#1b263b", "#415a77", "#778da9"],
                 template: .panorama,
                 isPremium: false,
-                innerImageFile: "night-city.heic",
+                innerImageFile: "night-city.png",
                 accessibilityDescription: "City skyline at night, spans full inner display",
                 tags: ["city", "night", "urban"]
             ),
@@ -212,7 +212,7 @@ public struct DefaultPacks {
                 palette: ["#d4a574", "#c4956a", "#a67c52", "#8b6339"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "desert-dunes.heic",
+                innerImageFile: "desert-dunes.png",
                 accessibilityDescription: "Golden desert dunes, reveals horizon when opened",
                 tags: ["nature", "desert", "warm"]
             ),
@@ -223,7 +223,7 @@ public struct DefaultPacks {
                 palette: ["#1a1a2e", "#4a1942", "#6b2d5c", "#9b4d96"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "space-nebula.heic",
+                innerImageFile: "space-nebula.png",
                 accessibilityDescription: "Colorful nebula in space, reveals full cosmic scene when opened",
                 tags: ["space", "cosmic", "colorful"]
             ),
@@ -234,7 +234,7 @@ public struct DefaultPacks {
                 palette: ["#ffcad4", "#f4acb7", "#9d8189", "#6d6875"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "cherry-blossom.heic",
+                innerImageFile: "cherry-blossom.png",
                 accessibilityDescription: "Cherry blossom branches, reveals tree when opened",
                 tags: ["nature", "flowers", "spring"]
             ),
@@ -245,7 +245,7 @@ public struct DefaultPacks {
                 palette: ["#2b2d42", "#8d99ae", "#edf2f4", "#ef233c"],
                 template: .reveal,
                 isPremium: false,
-                innerImageFile: "abstract-waves.heic",
+                innerImageFile: "abstract-waves.png",
                 accessibilityDescription: "Abstract wave pattern, reveals full design when opened",
                 tags: ["abstract", "modern", "pattern"]
             )
@@ -262,7 +262,7 @@ public struct DefaultPacks {
                 palette: ["#000000", "#333333", "#666666", "#999999"],
                 template: i % 3 == 0 ? .panorama : (i % 3 == 1 ? .reveal : .splitMood),
                 isPremium: true,
-                innerImageFile: "premium-\(i).heic",
+                innerImageFile: "premium-\(i).png",
                 accessibilityDescription: "Premium wallpaper design number \(i)",
                 tags: ["premium"]
             )

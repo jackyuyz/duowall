@@ -9,16 +9,22 @@ import CoreGraphics
 //   - Outer display: 5.4" portrait, 1398×2034 px (aspect ratio ~1:1.455)
 //   - Inner display: 7.6" unfolded landscape, 2670×1878 px (aspect ratio ~1.42:1)
 //
-// ASSUMPTIONS (unconfirmed, marked in one place):
-//   - Crease width: ~2% of inner width (0.49...0.51 normalized)
-//   - Point sizes / scale factor: unknown, assumed @3x
-//   - Outer crop from single wallpaper: computed from outer aspect ratio
+// RUNTIME VALUES (must be read at runtime, NOT hardcoded):
+//   - Crease: from reservedRegions(kind: .division) - exists only when half-folded, 0 when fully open
+//   - Point sizes: from GeometryReader bounds at runtime
+//   - Scale factor: from displayScale at runtime
+//   - Safe areas: from safeAreaInsets at runtime
 //
-// These MUST be verified on real hardware in M0/M9 and updated accordingly.
+// MOCK DEFAULTS (third-party estimates, for testing only):
+//   - Inner: 951×669pt landscape (renders at 2007×2853 @3x, downsampled)
+//   - Outer: 466×678pt portrait
+//   - Mock crease: ~40pt when half-folded
+//
+// These MUST be verified on real hardware in M0/M9.
 
-/// Confirmed display dimensions from PM research
+/// Confirmed display dimensions from PM research (pixel values only)
 public enum DuoDisplayConstants {
-    // MARK: - Public (PM-researched) values
+    // MARK: - Public (PM-researched) pixel values
     
     /// Inner (unfolded) display: 7.6" diagonal, landscape orientation
     public static let innerWidthPx: CGFloat = 2670
@@ -32,19 +38,30 @@ public enum DuoDisplayConstants {
     public static let outerAspectRatio: CGFloat = 1398.0 / 2034.0  // ~0.6873 (or 1:1.455)
     public static let outerDiagonalInches: CGFloat = 5.4
     
-    // MARK: - Assumptions (unconfirmed)
+    // MARK: - Mock Defaults (third-party estimates, for testing only)
     
-    /// ASSUMPTION: Crease width as fraction of inner display width
-    public static let creaseWidthFraction: CGFloat = 0.02
+    /// MOCK DEFAULT: Inner display size in points (third-party estimate)
+    /// Real value must come from GeometryReader.bounds at runtime
+    public static let mockInnerWidthPt: CGFloat = 951
+    public static let mockInnerHeightPt: CGFloat = 669
     
-    /// ASSUMPTION: Scale factor (points to pixels)
-    public static let assumedScaleFactor: CGFloat = 3.0
+    /// MOCK DEFAULT: Outer display size in points (third-party estimate)
+    /// Real value must come from GeometryReader.bounds at runtime
+    public static let mockOuterWidthPt: CGFloat = 466
+    public static let mockOuterHeightPt: CGFloat = 678
+    
+    /// MOCK DEFAULT: Scale factor for testing
+    /// Real value must come from displayScale at runtime
+    public static let mockScaleFactor: CGFloat = 3.0
+    
+    /// MOCK DEFAULT: Crease width in points (~40pt when half-folded)
+    /// Real value must come from reservedRegions(kind: .division) at runtime
+    /// Returns 0 when fully unfolded or on non-Duo devices
+    public static let mockCreaseWidthPt: CGFloat = 40
     
     /// Computed: outer crop width as fraction of inner width
     /// Based on outer aspect ratio applied to full inner height
     public static var outerCropWidthFraction: CGFloat {
-        // Outer needs to show content at its aspect ratio (1398:2034)
-        // If we use full inner height, width = height * (outer width / outer height)
         let cropWidth = innerHeightPx * (outerWidthPx / outerHeightPx)
         return cropWidth / innerWidthPx  // ~0.4839
     }
