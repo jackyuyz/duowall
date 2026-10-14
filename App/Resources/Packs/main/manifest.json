@@ -1,0 +1,342 @@
+{
+  "id": "main",
+  "name": "DuoWall Collection",
+  "localizedNames": {
+    "zh": "DuoWall 精选"
+  },
+  "description": "The essential wallpaper collection for iPhone Duo",
+  "version": 1,
+  "license": "In-house designs + CC0 licensed artwork. See docs/artwork-licenses.md",
+  "pairs": [
+    {
+      "id": "aurora",
+      "title": "Aurora",
+      "localizedTitles": {"zh": "极光"},
+      "palette": ["#1a1a2e", "#16213e", "#0f3460", "#e94560"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "aurora.png",
+      "accessibilityDescription": "Aurora borealis over mountains, reveals mountain range when opened",
+      "tags": ["nature", "night", "mountains"]
+    },
+    {
+      "id": "ocean-depths",
+      "title": "Ocean Depths",
+      "localizedTitles": {"zh": "深海"},
+      "palette": ["#0a1628", "#1a3a5c", "#2d6187", "#4a90b5"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "ocean-depths.png",
+      "accessibilityDescription": "Deep ocean scene, reveals underwater coral when opened",
+      "tags": ["ocean", "underwater", "calm"]
+    },
+    {
+      "id": "sunset-gradient",
+      "title": "Sunset Gradient",
+      "localizedTitles": {"zh": "日落渐变"},
+      "palette": ["#ff6b6b", "#ffa07a", "#ffd93d", "#6bcb77"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "sunset-gradient.png",
+      "accessibilityDescription": "Warm sunset colors, reveals extended sky when opened",
+      "tags": ["gradient", "warm", "sunset"]
+    },
+    {
+      "id": "minimal-geo",
+      "title": "Minimal Geometry",
+      "localizedTitles": {"zh": "几何简约"},
+      "palette": ["#f8f9fa", "#e9ecef", "#343a40", "#212529"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "minimal-geo.png",
+      "accessibilityDescription": "Clean geometric shapes, reveals full pattern when opened",
+      "tags": ["minimal", "geometric", "modern"]
+    },
+    {
+      "id": "forest-mist",
+      "title": "Forest Mist",
+      "localizedTitles": {"zh": "森林薄雾"},
+      "palette": ["#2d4a3e", "#3d6b4f", "#5a8f6c", "#95c4a8"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "forest-mist.png",
+      "accessibilityDescription": "Misty forest, reveals depth of trees when opened",
+      "tags": ["nature", "forest", "calm"]
+    },
+    {
+      "id": "night-city",
+      "title": "Night City",
+      "localizedTitles": {"zh": "夜城"},
+      "palette": ["#0d1b2a", "#1b263b", "#415a77", "#778da9"],
+      "template": "panorama",
+      "isPremium": false,
+      "innerImageFile": "night-city.png",
+      "accessibilityDescription": "City skyline at night, spans full inner display",
+      "tags": ["city", "night", "urban"]
+    },
+    {
+      "id": "desert-dunes",
+      "title": "Desert Dunes",
+      "localizedTitles": {"zh": "沙漠沙丘"},
+      "palette": ["#d4a574", "#c4956a", "#a67c52", "#8b6339"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "desert-dunes.png",
+      "accessibilityDescription": "Golden desert dunes, reveals horizon when opened",
+      "tags": ["nature", "desert", "warm"]
+    },
+    {
+      "id": "space-nebula",
+      "title": "Space Nebula",
+      "localizedTitles": {"zh": "星云"},
+      "palette": ["#1a1a2e", "#4a1942", "#6b2d5c", "#9b4d96"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "space-nebula.png",
+      "accessibilityDescription": "Colorful nebula in space, reveals full cosmic scene when opened",
+      "tags": ["space", "cosmic", "colorful"]
+    },
+    {
+      "id": "cherry-blossom",
+      "title": "Cherry Blossom",
+      "localizedTitles": {"zh": "樱花"},
+      "palette": ["#ffcad4", "#f4acb7", "#9d8189", "#6d6875"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "cherry-blossom.png",
+      "accessibilityDescription": "Cherry blossom branches, reveals tree when opened",
+      "tags": ["nature", "flowers", "spring"]
+    },
+    {
+      "id": "abstract-waves",
+      "title": "Abstract Waves",
+      "localizedTitles": {"zh": "抽象波纹"},
+      "palette": ["#2b2d42", "#8d99ae", "#edf2f4", "#ef233c"],
+      "template": "reveal",
+      "isPremium": false,
+      "innerImageFile": "abstract-waves.png",
+      "accessibilityDescription": "Abstract wave pattern, reveals full design when opened",
+      "tags": ["abstract", "modern", "pattern"]
+    },
+    {
+      "id": "premium-1",
+      "title": "Premium Design 1",
+      "localizedTitles": {"zh": "高级设计 1"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "reveal",
+      "isPremium": true,
+      "innerImageFile": "premium-1.png",
+      "accessibilityDescription": "Premium wallpaper design number 1",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-2",
+      "title": "Premium Design 2",
+      "localizedTitles": {"zh": "高级设计 2"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "splitMood",
+      "isPremium": true,
+      "innerImageFile": "premium-2.png",
+      "accessibilityDescription": "Premium wallpaper design number 2",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-3",
+      "title": "Premium Design 3",
+      "localizedTitles": {"zh": "高级设计 3"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "panorama",
+      "isPremium": true,
+      "innerImageFile": "premium-3.png",
+      "accessibilityDescription": "Premium wallpaper design number 3",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-4",
+      "title": "Premium Design 4",
+      "localizedTitles": {"zh": "高级设计 4"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "reveal",
+      "isPremium": true,
+      "innerImageFile": "premium-4.png",
+      "accessibilityDescription": "Premium wallpaper design number 4",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-5",
+      "title": "Premium Design 5",
+      "localizedTitles": {"zh": "高级设计 5"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "splitMood",
+      "isPremium": true,
+      "innerImageFile": "premium-5.png",
+      "accessibilityDescription": "Premium wallpaper design number 5",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-6",
+      "title": "Premium Design 6",
+      "localizedTitles": {"zh": "高级设计 6"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "panorama",
+      "isPremium": true,
+      "innerImageFile": "premium-6.png",
+      "accessibilityDescription": "Premium wallpaper design number 6",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-7",
+      "title": "Premium Design 7",
+      "localizedTitles": {"zh": "高级设计 7"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "reveal",
+      "isPremium": true,
+      "innerImageFile": "premium-7.png",
+      "accessibilityDescription": "Premium wallpaper design number 7",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-8",
+      "title": "Premium Design 8",
+      "localizedTitles": {"zh": "高级设计 8"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "splitMood",
+      "isPremium": true,
+      "innerImageFile": "premium-8.png",
+      "accessibilityDescription": "Premium wallpaper design number 8",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-9",
+      "title": "Premium Design 9",
+      "localizedTitles": {"zh": "高级设计 9"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "panorama",
+      "isPremium": true,
+      "innerImageFile": "premium-9.png",
+      "accessibilityDescription": "Premium wallpaper design number 9",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-10",
+      "title": "Premium Design 10",
+      "localizedTitles": {"zh": "高级设计 10"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "reveal",
+      "isPremium": true,
+      "innerImageFile": "premium-10.png",
+      "accessibilityDescription": "Premium wallpaper design number 10",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-11",
+      "title": "Premium Design 11",
+      "localizedTitles": {"zh": "高级设计 11"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "splitMood",
+      "isPremium": true,
+      "innerImageFile": "premium-11.png",
+      "accessibilityDescription": "Premium wallpaper design number 11",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-12",
+      "title": "Premium Design 12",
+      "localizedTitles": {"zh": "高级设计 12"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "panorama",
+      "isPremium": true,
+      "innerImageFile": "premium-12.png",
+      "accessibilityDescription": "Premium wallpaper design number 12",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-13",
+      "title": "Premium Design 13",
+      "localizedTitles": {"zh": "高级设计 13"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "reveal",
+      "isPremium": true,
+      "innerImageFile": "premium-13.png",
+      "accessibilityDescription": "Premium wallpaper design number 13",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-14",
+      "title": "Premium Design 14",
+      "localizedTitles": {"zh": "高级设计 14"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "splitMood",
+      "isPremium": true,
+      "innerImageFile": "premium-14.png",
+      "accessibilityDescription": "Premium wallpaper design number 14",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-15",
+      "title": "Premium Design 15",
+      "localizedTitles": {"zh": "高级设计 15"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "panorama",
+      "isPremium": true,
+      "innerImageFile": "premium-15.png",
+      "accessibilityDescription": "Premium wallpaper design number 15",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-16",
+      "title": "Premium Design 16",
+      "localizedTitles": {"zh": "高级设计 16"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "reveal",
+      "isPremium": true,
+      "innerImageFile": "premium-16.png",
+      "accessibilityDescription": "Premium wallpaper design number 16",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-17",
+      "title": "Premium Design 17",
+      "localizedTitles": {"zh": "高级设计 17"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "splitMood",
+      "isPremium": true,
+      "innerImageFile": "premium-17.png",
+      "accessibilityDescription": "Premium wallpaper design number 17",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-18",
+      "title": "Premium Design 18",
+      "localizedTitles": {"zh": "高级设计 18"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "panorama",
+      "isPremium": true,
+      "innerImageFile": "premium-18.png",
+      "accessibilityDescription": "Premium wallpaper design number 18",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-19",
+      "title": "Premium Design 19",
+      "localizedTitles": {"zh": "高级设计 19"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "reveal",
+      "isPremium": true,
+      "innerImageFile": "premium-19.png",
+      "accessibilityDescription": "Premium wallpaper design number 19",
+      "tags": ["premium"]
+    },
+    {
+      "id": "premium-20",
+      "title": "Premium Design 20",
+      "localizedTitles": {"zh": "高级设计 20"},
+      "palette": ["#000000", "#333333", "#666666", "#999999"],
+      "template": "splitMood",
+      "isPremium": true,
+      "innerImageFile": "premium-20.png",
+      "accessibilityDescription": "Premium wallpaper design number 20",
+      "tags": ["premium"]
+    }
+  ]
+}
