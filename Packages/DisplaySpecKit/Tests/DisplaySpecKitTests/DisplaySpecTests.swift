@@ -14,11 +14,19 @@ final class DisplaySpecTests: XCTestCase {
     
     func testSpecLoads() {
         let spec = loader.spec
-        XCTAssertEqual(spec.version, 1)
+        XCTAssertEqual(spec.version, 2)
+        // PM-researched values: outer 5.4" 1398x2034, inner 7.6" 2670x1878
         XCTAssertEqual(spec.inner.width, 2670)
         XCTAssertEqual(spec.inner.height, 1878)
         XCTAssertEqual(spec.outer.width, 1398)
         XCTAssertEqual(spec.outer.height, 2034)
+        
+        // Verify aspect ratios
+        let innerAspect = spec.inner.width / spec.inner.height
+        XCTAssertEqual(innerAspect, 1.4217, accuracy: 0.001, "Inner aspect ~1.42:1")
+        
+        let outerAspect = spec.outer.width / spec.outer.height
+        XCTAssertEqual(outerAspect, 0.6873, accuracy: 0.001, "Outer aspect 1:1.455")
     }
     
     func testDefaultSpecFallback() {

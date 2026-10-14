@@ -29,40 +29,53 @@ public final class DisplaySpecLoader: @unchecked Sendable {
         return try? decoder.decode(DisplaySpec.self, from: data)
     }
     
-    /// Default spec with assumed values (used if bundled JSON fails to load)
+    /// Default spec using DuoDisplayConstants (PM-researched values)
     public static func defaultSpec() -> DisplaySpec {
-        DisplaySpec(
-            inner: CGSize(width: 2670, height: 1878),
-            outer: CGSize(width: 1398, height: 2034),
+        let outerCrop = calculateDefaultOuterCrop()
+        let creaseHalfWidth = DuoDisplayConstants.creaseWidthFraction / 2
+        
+        return DisplaySpec(
+            inner: CGSize(
+                width: DuoDisplayConstants.innerWidthPx,
+                height: DuoDisplayConstants.innerHeightPx
+            ),
+            outer: CGSize(
+                width: DuoDisplayConstants.outerWidthPx,
+                height: DuoDisplayConstants.outerHeightPx
+            ),
             singleImage: SingleImageMapping(
-                outerCrop: calculateDefaultOuterCrop(),
+                outerCrop: outerCrop,
                 systemZoom: 1.0,
-                notes: "ASSUMPTION: Centered crop at ~48% width. Verify on device."
+                notes: "Computed from outer aspect ratio (1:\(String(format: "%.3f", DuoDisplayConstants.outerHeightPx / DuoDisplayConstants.outerWidthPx))). Crop width: \(String(format: "%.2f", outerCrop.width * 100))% of inner. Verify on device."
             ),
             safeAreas: defaultSafeAreas(),
-            creaseBand: ClosedRangeDouble(0.49...0.51),
-            version: 1
+            creaseBand: ClosedRangeDouble((0.5 - creaseHalfWidth)...(0.5 + creaseHalfWidth)),
+            version: 2
         )
     }
     
-    /// Calculate the default outer crop based on aspect ratio assumptions.
+    /// Calculate the outer crop based on outer display aspect ratio.
     ///
-    /// **ASSUMPTION:** The outer display shows a centered crop of the inner canvas,
-    /// maintaining the outer's aspect ratio.
+    /// Uses PM-researched dimensions: outer 1398×2034 (1:1.455 aspect).
+    /// The crop uses full inner height and computes width to match outer aspect ratio.
     private static func calculateDefaultOuterCrop() -> NormalizedRect {
-        let innerWidth: CGFloat = 2670
-        let innerHeight: CGFloat = 1878
-        let outerWidth: CGFloat = 1398
-        let outerHeight: CGFloat = 2034
+        // Use constants from DuoDisplayConstants
+        let innerWidth = DuoDisplayConstants.innerWidthPx
+        let innerHeight = DuoDisplayConstants.innerHeightPx
+        let outerWidth = DuoDisplayConstants.outerWidthPx
+        let outerHeight = DuoDisplayConstants.outerHeightPx
         
+        // Outer aspect ratio: 1398/2034 ≈ 0.6873
         let outerAspect = outerWidth / outerHeight
         
+        // Use full inner height, compute width from outer aspect
         let cropHeight = innerHeight
         let cropWidth = cropHeight * outerAspect
         
-        let normalizedWidth = cropWidth / innerWidth
+        // Normalize to inner canvas
+        let normalizedWidth = cropWidth / innerWidth  // ≈ 0.4839
         let normalizedHeight: CGFloat = 1.0
-        let normalizedX = (1 - normalizedWidth) / 2
+        let normalizedX = (1 - normalizedWidth) / 2   // Center horizontally
         let normalizedY: CGFloat = 0
         
         return NormalizedRect(

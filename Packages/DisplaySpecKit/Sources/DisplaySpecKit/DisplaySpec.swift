@@ -3,15 +3,52 @@ import Foundation
 import CoreGraphics
 #endif
 
-// MARK: - Display Dimension Assumptions
-// These dimensions are based on available information about iPhone Duo.
-// Marked clearly as assumptions per spec §11.
+// MARK: - iPhone Duo Display Constants
 //
-// ASSUMPTION: Inner display is 2670×1878 (landscape orientation)
-// ASSUMPTION: Outer display is 1398×2034 (portrait orientation)
-// ASSUMPTION: Outer crop from single wallpaper is ~48% of inner width, centered
+// PUBLIC (PM-researched, not yet Apple-doc-confirmed):
+//   - Outer display: 5.4" portrait, 1398×2034 px (aspect ratio ~1:1.455)
+//   - Inner display: 7.6" unfolded landscape, 2670×1878 px (aspect ratio ~1.42:1)
+//
+// ASSUMPTIONS (unconfirmed, marked in one place):
+//   - Crease width: ~2% of inner width (0.49...0.51 normalized)
+//   - Point sizes / scale factor: unknown, assumed @3x
+//   - Outer crop from single wallpaper: computed from outer aspect ratio
 //
 // These MUST be verified on real hardware in M0/M9 and updated accordingly.
+
+/// Confirmed display dimensions from PM research
+public enum DuoDisplayConstants {
+    // MARK: - Public (PM-researched) values
+    
+    /// Inner (unfolded) display: 7.6" diagonal, landscape orientation
+    public static let innerWidthPx: CGFloat = 2670
+    public static let innerHeightPx: CGFloat = 1878
+    public static let innerAspectRatio: CGFloat = 2670.0 / 1878.0  // ~1.4217
+    public static let innerDiagonalInches: CGFloat = 7.6
+    
+    /// Outer (cover) display: 5.4" diagonal, portrait orientation
+    public static let outerWidthPx: CGFloat = 1398
+    public static let outerHeightPx: CGFloat = 2034
+    public static let outerAspectRatio: CGFloat = 1398.0 / 2034.0  // ~0.6873 (or 1:1.455)
+    public static let outerDiagonalInches: CGFloat = 5.4
+    
+    // MARK: - Assumptions (unconfirmed)
+    
+    /// ASSUMPTION: Crease width as fraction of inner display width
+    public static let creaseWidthFraction: CGFloat = 0.02
+    
+    /// ASSUMPTION: Scale factor (points to pixels)
+    public static let assumedScaleFactor: CGFloat = 3.0
+    
+    /// Computed: outer crop width as fraction of inner width
+    /// Based on outer aspect ratio applied to full inner height
+    public static var outerCropWidthFraction: CGFloat {
+        // Outer needs to show content at its aspect ratio (1398:2034)
+        // If we use full inner height, width = height * (outer width / outer height)
+        let cropWidth = innerHeightPx * (outerWidthPx / outerHeightPx)
+        return cropWidth / innerWidthPx  // ~0.4839
+    }
+}
 
 /// Complete display specification for iPhone Duo.
 ///

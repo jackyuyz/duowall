@@ -10,11 +10,26 @@ import math
 
 SCALE = 2
 
-INNER_WIDTH = 2670 * SCALE // 4
-INNER_HEIGHT = 1878 * SCALE // 4
+# PM-researched display dimensions (not yet Apple-doc-confirmed)
+# Inner: 7.6" unfolded landscape 2670x1878 px (aspect ~1.42:1)
+# Outer: 5.4" portrait 1398x2034 px (aspect 1:1.455)
+INNER_WIDTH_PX = 2670
+INNER_HEIGHT_PX = 1878
+OUTER_WIDTH_PX = 1398
+OUTER_HEIGHT_PX = 2034
 
-OUTER_WIDTH = 1398 * SCALE // 4
-OUTER_HEIGHT = 2034 * SCALE // 4
+# Scaled for mockups (divide by 4, then multiply by scale factor)
+INNER_WIDTH = INNER_WIDTH_PX * SCALE // 4
+INNER_HEIGHT = INNER_HEIGHT_PX * SCALE // 4
+
+OUTER_WIDTH = OUTER_WIDTH_PX * SCALE // 4
+OUTER_HEIGHT = OUTER_HEIGHT_PX * SCALE // 4
+
+# Outer crop: computed from outer aspect ratio applied to full inner height
+# Crop width = inner_height * (outer_width / outer_height) = 1878 * (1398/2034) ≈ 1291px
+# As fraction of inner width: 1291 / 2670 ≈ 0.4839
+OUTER_CROP_WIDTH_FRACTION = INNER_HEIGHT_PX * (OUTER_WIDTH_PX / OUTER_HEIGHT_PX) / INNER_WIDTH_PX
+OUTER_CROP_X_FRACTION = (1 - OUTER_CROP_WIDTH_FRACTION) / 2  # Centered
 
 DEVICE_CORNER_RADIUS = 60 * SCALE // 2
 BEZEL = 12 * SCALE // 2
@@ -209,15 +224,26 @@ def draw_device_frame_inner(img, draw, padding=30):
 
 
 def draw_device_frame_outer(img, draw, padding=60):
-    """Draw the closed iPhone Duo device frame with side thickness."""
+    """Draw the closed iPhone Duo device frame with side thickness.
+    
+    Returns screen area with exact outer display aspect ratio (1:1.455).
+    """
     w, h = img.size
     
     thickness = 25
+    
+    # Calculate screen dimensions to match outer display aspect ratio exactly
+    # OUTER_WIDTH and OUTER_HEIGHT are scaled from 1398x2034 (1:1.455)
+    screen_w = OUTER_WIDTH
+    screen_h = OUTER_HEIGHT
+    
+    # Center the device in the canvas
     frame_x1 = padding + thickness
     frame_y1 = padding
-    frame_x2 = w - padding
-    frame_y2 = h - padding
+    frame_x2 = frame_x1 + screen_w
+    frame_y2 = frame_y1 + screen_h
     
+    # Draw fold thickness on left side
     draw.rounded_rectangle(
         [padding, frame_y1 - BEZEL, padding + thickness, frame_y2 + BEZEL],
         radius=8, fill=DEVICE_SIDE
@@ -226,6 +252,7 @@ def draw_device_frame_outer(img, draw, padding=60):
         line_x = padding + 5 + i * 7
         draw.line([(line_x, frame_y1 + 50), (line_x, frame_y1 + 120)], fill=(55, 55, 65), width=2)
     
+    # Draw main device frame
     draw_rounded_rect(draw, (frame_x1-BEZEL, frame_y1-BEZEL, frame_x2+BEZEL, frame_y2+BEZEL),
                       DEVICE_CORNER_RADIUS, fill=DEVICE_FRAME)
     
@@ -251,9 +278,10 @@ def create_unfolded_mockup():
     
     draw_wallpaper_art(draw, (sx1, sy1 + 50, sx1 + left_w, sy2 - 10), "aurora")
     
-    crop_margin = left_w * 0.25
-    crop_x1 = sx1 + crop_margin
-    crop_x2 = sx1 + left_w - crop_margin * 0.5
+    # Outer crop frame uses computed aspect ratio (1:1.455)
+    crop_w = left_w * OUTER_CROP_WIDTH_FRACTION * 2  # *2 because left_w is half of total
+    crop_x1 = sx1 + (left_w - crop_w) // 2
+    crop_x2 = crop_x1 + crop_w
     draw.rounded_rectangle([crop_x1, sy1 + 60, crop_x2, sy2 - 20],
                            radius=8, outline=ACCENT, width=2)
     
@@ -360,7 +388,8 @@ def create_half_folded_mockup():
     
     draw_wallpaper_art(draw, (top_x1 + 20, top_y1 + 50, top_x2 - 20, top_y2 - 20), "sunset")
     
-    crop_w = (top_x2 - top_x1) * 0.35
+    # Outer crop frame uses computed aspect ratio (1:1.455)
+    crop_w = (top_x2 - top_x1) * OUTER_CROP_WIDTH_FRACTION
     crop_x1 = top_x1 + (top_x2 - top_x1 - crop_w) // 2
     crop_x2 = crop_x1 + crop_w
     draw.rounded_rectangle([crop_x1, top_y1 + 60, crop_x2, top_y2 - 30],
@@ -423,9 +452,17 @@ def create_half_folded_mockup():
 
 
 def create_outer_mockup():
-    """Create polished outer (closed) display mockup."""
-    canvas_w = OUTER_WIDTH + 140
-    canvas_h = OUTER_HEIGHT + 100
+    """Create polished outer (closed) display mockup.
+    
+    Uses outer display dimensions: 5.4" 1398x2034 (aspect 1:1.455)
+    Screen area has exact 1:1.455 aspect ratio.
+    """
+    # Canvas sized to fit device frame with padding
+    # padding=50, thickness=25, bezel=BEZEL on each side
+    padding = 50
+    thickness = 25
+    canvas_w = padding + thickness + OUTER_WIDTH + BEZEL * 2 + padding
+    canvas_h = padding + OUTER_HEIGHT + BEZEL * 2 + padding
     img = Image.new('RGB', (canvas_w, canvas_h), (10, 10, 15))
     draw = ImageDraw.Draw(img)
     
@@ -613,7 +650,8 @@ def create_editor_mockup():
     draw.rounded_rectangle([art_x1, art_y1, art_x2, art_y2], radius=8, outline=(60, 60, 75), width=1)
     
     art_w = art_x2 - art_x1
-    crop_w = art_w * 0.48
+    # Outer crop frame uses computed aspect ratio (1:1.455) = ~48.39% width
+    crop_w = art_w * OUTER_CROP_WIDTH_FRACTION
     crop_x1 = art_x1 + (art_w - crop_w) // 2
     crop_x2 = crop_x1 + crop_w
     draw.rounded_rectangle([crop_x1, art_y1 + 10, crop_x2, art_y2 - 10],
