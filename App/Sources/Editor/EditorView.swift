@@ -208,7 +208,7 @@ struct EditorView: View {
                 }
             )) {
                 ForEach(TemplateKind.allCases, id: \.self) { template in
-                    Text(template.displayName).tag(template)
+                    Text(LocalizedStringKey(template.displayName)).tag(template)
                 }
             }
             .pickerStyle(.segmented)
@@ -435,7 +435,7 @@ struct LayerRow: View {
             Image(systemName: layerIcon)
                 .foregroundColor(.secondary)
             
-            Text(layer.typeName)
+            Text(LocalizedStringKey(layer.typeName))
                 .lineLimit(1)
             
             Spacer()
@@ -473,6 +473,7 @@ struct LayerRow: View {
 struct ExportSheet: View {
     let layerDoc: LayerDoc
     @Environment(\.dismiss) private var dismiss
+    @Environment(ProStore.self) private var store
     
     @State private var format: ExportFormat = .heic
     @State private var colorSpace: ExportColorSpace = .srgb
@@ -499,10 +500,21 @@ struct ExportSheet: View {
                     .pickerStyle(.segmented)
                 }
                 
+                if store.showsWatermark {
+                    Section {
+                        Text("Free exports include a small watermark.")
+                    }
+                }
+
                 Section {
                     Button {
                         isExporting = true
-                        // TODO: Actual export implementation
+                        let config = ExportConfig(
+                            format: format,
+                            colorSpace: colorSpace,
+                            includeWatermark: store.showsWatermark
+                        )
+                        _ = config
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             isExporting = false
                             dismiss()
@@ -534,4 +546,5 @@ struct ExportSheet: View {
 
 #Preview {
     EditorView(pair: DefaultPacks.freePairs().first)
+        .environment(ProStore())
 }

@@ -13,6 +13,7 @@ struct PairDetailView: View {
     @State private var selectedPreview: PreviewMode = .inner
     @State private var showingSafeAreas = true
     @State private var showingEditor = false
+    @State private var showingApply = false
     
     enum PreviewMode: String, CaseIterable {
         case outer = "Outer"
@@ -58,6 +59,11 @@ struct PairDetailView: View {
         }
         .fullScreenCover(isPresented: $showingEditor) {
             EditorView(pair: pair)
+        }
+        .sheet(isPresented: $showingApply) {
+            ApplyWallpaperSheet(
+                shortcutInstalled: UserDefaults.standard.bool(forKey: "shortcutInstalledConfirmed")
+            )
         }
     }
     
@@ -123,7 +129,7 @@ struct PairDetailView: View {
                 Text("Template")
                     .foregroundColor(.secondary)
                 Spacer()
-                Text(pair.template.displayName)
+                Text(LocalizedStringKey(pair.template.displayName))
             }
             
             if let artist = pair.artistCredit {
@@ -160,7 +166,7 @@ struct PairDetailView: View {
             .buttonStyle(.borderedProminent)
             
             Button {
-                // TODO: Apply flow
+                showingApply = true
             } label: {
                 Label("Apply Wallpaper", systemImage: "square.and.arrow.down")
                     .frame(maxWidth: .infinity)

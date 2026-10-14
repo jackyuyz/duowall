@@ -22,10 +22,16 @@ struct DuoWallApp: App {
         return SystemFoldStateProvider()
     }()
     
+    @State private var proStore = ProStore()
+
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environment(\.foldStateProvider, foldStateProvider)
+                .environment(proStore)
+                .task {
+                    await proStore.listenForTransactions()
+                }
         }
     }
 }

@@ -62,7 +62,7 @@ struct GalleryView: View {
     }
     
     @ViewBuilder
-    private func sectionHeader(_ title: String) -> some View {
+    private func sectionHeader(_ title: LocalizedStringKey) -> some View {
         HStack {
             Text(title)
                 .font(.headline)
@@ -142,7 +142,8 @@ struct PairCard: View {
         .onChange(of: foldState) { _, newState in
             updateRevealProgress(for: newState)
         }
-        .accessibilityLabel("\(pair.title) pair\(isLocked ? ", Pro required" : ", free")")
+        .accessibilityLabel(Text(pair.localizedTitle()))
+        .accessibilityValue(isLocked ? Text("Pro required") : Text("Free"))
         .accessibilityHint(pair.accessibilityDescription)
     }
     

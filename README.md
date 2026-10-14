@@ -18,6 +18,17 @@ DuoWall is a wallpaper workshop specifically designed for iPhone Duo. It solves 
 - **Smart Fill**: Blur extend, mirror extend, or solid color for portrait photos
 - **One-Tap Apply**: Export to Photos and apply via Shortcuts
 
+## Pricing
+
+DuoWall Pro (`com.jackyu.duowall.pro`) is a one-time non-consumable with Family Sharing turned on.
+
+| | Price |
+|---|---|
+| Regular | $6.99 |
+| Launch week | $4.99 |
+
+The launch-week price is an introductory offer. Both prices are set in App Store Connect, not hardcoded in the app. `Configuration.storekit` uses the regular **$6.99** price for local StoreKit testing and marks the product `familyShareable`. A family member's purchase unlocks Pro for the rest of the Family Sharing group.
+
 ## Project Structure
 
 ```
@@ -35,7 +46,9 @@ duowall-ios/
 │   ├── FoldKit/          # Fold state management (testable on Linux)
 │   ├── DisplaySpecKit/   # Display geometry helpers
 │   ├── EditorCore/       # Layer document model, commands, undo
-│   └── RenderKit/        # Rendering logic, presets
+│   ├── RenderKit/        # Rendering logic, presets
+│   └── ApplyKit/         # Shortcut apply flow and manual-guide fallback
+├── Configuration.storekit  # StoreKit local config (family-shareable Pro, $6.99)
 ├── Tests/
 │   ├── DuoWallTests/     # Unit tests
 │   └── DuoWallUITests/   # UI tests
@@ -86,10 +99,12 @@ cd Packages/FoldKit && swift test
 cd Packages/DisplaySpecKit && swift test
 cd Packages/EditorCore && swift test
 cd Packages/RenderKit && swift test
+cd Packages/ApplyKit && swift test
 ```
 
 **Xcode Tests:**
 - Run the `DuoWall` scheme tests (⌘U) for full integration tests.
+- `Tests/DuoWallTests/StoreKitSessionTests.swift` uses StoreKitTest `SKTestSession` for AC9 (purchase, restore, refund, Ask to Buy). The scheme selects `Configuration.storekit`. These tests compile in Xcode and are not part of `swift test` on Linux.
 
 ### UI Test Schemes
 

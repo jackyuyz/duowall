@@ -57,6 +57,7 @@ targets:
       - package: DisplaySpecKit
       - package: EditorCore
       - package: RenderKit
+      - package: ApplyKit
     entitlements:
       path: App/Resources/DuoWall.entitlements
     info:
@@ -86,6 +87,8 @@ targets:
     platform: iOS
     sources:
       - path: Tests/DuoWallTests
+    resources:
+      - path: Configuration.storekit
     dependencies:
       - target: DuoWall
     settings:
@@ -108,6 +111,8 @@ packages:
     path: Packages/EditorCore
   RenderKit:
     path: Packages/RenderKit
+  ApplyKit:
+    path: Packages/ApplyKit
 
 schemes:
   DuoWall:
@@ -118,10 +123,12 @@ schemes:
         DuoWallUITests: [test]
     run:
       config: Debug
+      storeKitConfiguration: Configuration.storekit
       commandLineArguments:
         "-FoldDebugOverlay": false
     test:
       config: Debug
+      storeKitConfiguration: Configuration.storekit
       gatherCoverageData: true
       targets:
         - DuoWallTests

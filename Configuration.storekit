@@ -1,0 +1,89 @@
+{
+  "identifier" : "D10WALLCONFIG",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "6.99",
+      "familyShareable" : true,
+      "internalID" : "D10WALLPRO01",
+      "localizations" : [
+        {
+          "description" : "Remove the watermark, unlock all 30 bundled pairs, and add text and gradient layers. One-time purchase. Family Sharing enabled.",
+          "displayName" : "DuoWall Pro",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "移除水印，解锁全部 30 对壁纸，并添加文本和渐变图层。一次性购买，已开启家人共享。",
+          "displayName" : "DuoWall Pro",
+          "locale" : "zh_Hans"
+        }
+      ],
+      "productID" : "com.jackyu.duowall.pro",
+      "referenceName" : "DuoWall Pro",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1234567890",
+    "_developerTeamID" : "",
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

@@ -3,9 +3,11 @@ import RenderKit
 
 /// Settings screen
 struct SettingsView: View {
+    @Environment(ProStore.self) private var store
     @AppStorage("exportFormat") private var exportFormat = "heic"
     @AppStorage("colorSpace") private var colorSpace = "srgb"
     @AppStorage("showSafeAreasDefault") private var showSafeAreasDefault = true
+    @State private var showingPaywall = false
     
     var body: some View {
         Form {
@@ -53,12 +55,18 @@ struct SettingsView: View {
             }
             
             Section("Purchase") {
+                Button("DuoWall Pro") {
+                    showingPaywall = true
+                }
                 Button("Restore Purchases") {
-                    // TODO: Implement restore
+                    Task { try? await store.restore() }
                 }
             }
         }
         .navigationTitle("Settings")
+        .sheet(isPresented: $showingPaywall) {
+            PaywallView()
+        }
     }
 }
 
@@ -97,7 +105,7 @@ struct FAQView: View {
     }
     
     @ViewBuilder
-    private func faqItem(question: String, answer: String) -> some View {
+    private func faqItem(question: LocalizedStringKey, answer: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(question)
                 .font(.headline)
@@ -118,24 +126,11 @@ struct PrivacyView: View {
                 Text("DuoWall is designed with your privacy in mind.")
                     .font(.headline)
                 
-                Text("""
-                    **Data Collection**
-                    DuoWall does not collect any personal data. Everything stays on your device.
-                    
-                    **Photos**
-                    We only request permission to add photos to your library (not read them). Your photos are never uploaded anywhere.
-                    
-                    **Analytics**
-                    DuoWall does not include any analytics or tracking SDKs.
-                    
-                    **Network**
-                    The only network requests are:
-                    • StoreKit (for purchases)
-                    • Opening the Shortcuts iCloud link (user-initiated)
-                    
-                    **Your Wallpapers**
-                    All your creations are stored locally on your device. We cannot see them.
-                    """)
+                Text("DuoWall does not collect any personal data. Everything stays on your device.")
+                Text("We only request permission to add photos to your library. Your photos are never uploaded.")
+                Text("DuoWall does not include any analytics or tracking.")
+                Text("The only network requests are StoreKit and the shortcut link you open.")
+                Text("All your creations stay on this device.")
                     .foregroundColor(.secondary)
             }
             .padding()
@@ -148,4 +143,5 @@ struct PrivacyView: View {
     NavigationStack {
         SettingsView()
     }
+    .environment(ProStore())
 }

@@ -63,28 +63,28 @@ struct FoldDebugOverlay: View {
             }
             
             HStack(spacing: 4) {
-                Button("C") {
+                Button("Closed") {
                     if let mock = provider as? MockFoldStateProvider {
                         mock.set(.closed, angle: 0)
                     }
                 }
                 .accessibilityIdentifier("fold.closed")
                 
-                Button("H") {
+                Button("Half") {
                     if let mock = provider as? MockFoldStateProvider {
                         mock.set(.partiallyOpen, angle: 90)
                     }
                 }
                 .accessibilityIdentifier("fold.half")
                 
-                Button("O") {
+                Button("Open") {
                     if let mock = provider as? MockFoldStateProvider {
                         mock.set(.fullyOpen, angle: 180)
                     }
                 }
                 .accessibilityIdentifier("fold.open")
                 
-                Button("N") {
+                Button("No Hinge") {
                     if let mock = provider as? MockFoldStateProvider {
                         mock.set(.noHinge)
                     }
