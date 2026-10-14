@@ -13,7 +13,6 @@ DerivedData/
 .build/
 .swiftpm/
 Package.resolved
-Packages/
 *.xcframework/
 
 # Build outputs
