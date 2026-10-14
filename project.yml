@@ -1,0 +1,179 @@
+name: DuoWall
+options:
+  bundleIdPrefix: com.jackyu
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "15.0"
+  defaultConfig: Debug
+  generateEmptyDirectories: true
+  groupSortPosition: top
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+
+configs:
+  Debug:
+    settings:
+      DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+  Release:
+    settings:
+      DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: ""
+
+targets:
+  DuoWall:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: App/Sources
+        excludes:
+          - "**/.DS_Store"
+      - path: App/Resources
+        type: folder
+    resources:
+      - path: App/Resources/Assets.xcassets
+      - path: App/Resources/Localizable.xcstrings
+      - path: App/Resources/PrivacyInfo.xcprivacy
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.jackyu.duowall
+        INFOPLIST_FILE: App/Resources/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        GENERATE_INFOPLIST_FILE: NO
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+        CODE_SIGN_ENTITLEMENTS: App/Resources/DuoWall.entitlements
+    dependencies:
+      - package: FoldKit
+      - package: DisplaySpecKit
+      - package: EditorCore
+      - package: RenderKit
+    entitlements:
+      path: App/Resources/DuoWall.entitlements
+    info:
+      path: App/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: DuoWall
+        CFBundleName: DuoWall
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIRequiresFullScreen: false
+        NSPhotoLibraryAddUsageDescription: "DuoWall saves the wallpapers you create to your photo library so you can set them as your wallpaper."
+        LSApplicationQueriesSchemes:
+          - shortcuts
+        CFBundleURLTypes:
+          - CFBundleURLName: com.jackyu.duowall
+            CFBundleURLSchemes:
+              - duowall
+
+  DuoWallTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests/DuoWallTests
+    dependencies:
+      - target: DuoWall
+    settings:
+      TEST_HOST: $(BUILT_PRODUCTS_DIR)/DuoWall.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DuoWall
+
+  DuoWallUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: Tests/DuoWallUITests
+    dependencies:
+      - target: DuoWall
+
+packages:
+  FoldKit:
+    path: Packages/FoldKit
+  DisplaySpecKit:
+    path: Packages/DisplaySpecKit
+  EditorCore:
+    path: Packages/EditorCore
+  RenderKit:
+    path: Packages/RenderKit
+
+schemes:
+  DuoWall:
+    build:
+      targets:
+        DuoWall: all
+        DuoWallTests: [test]
+        DuoWallUITests: [test]
+    run:
+      config: Debug
+      commandLineArguments:
+        "-FoldDebugOverlay": false
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - DuoWallTests
+        - DuoWallUITests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  DuoWall-UITest-NoHinge:
+    build:
+      targets:
+        DuoWall: all
+        DuoWallUITests: [test]
+    run:
+      config: Debug
+      commandLineArguments:
+        "-UITestMode": true
+        "-FoldMock": "nohinge"
+    test:
+      config: Debug
+      targets:
+        - DuoWallUITests
+
+  DuoWall-UITest-Closed:
+    build:
+      targets:
+        DuoWall: all
+        DuoWallUITests: [test]
+    run:
+      config: Debug
+      commandLineArguments:
+        "-UITestMode": true
+        "-FoldMock": "closed"
+    test:
+      config: Debug
+      targets:
+        - DuoWallUITests
+
+  DuoWall-UITest-Open:
+    build:
+      targets:
+        DuoWall: all
+        DuoWallUITests: [test]
+    run:
+      config: Debug
+      commandLineArguments:
+        "-UITestMode": true
+        "-FoldMock": "open"
+    test:
+      config: Debug
+      targets:
+        - DuoWallUITests
